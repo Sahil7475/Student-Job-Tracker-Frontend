@@ -59,6 +59,7 @@ const RegisterForm = () => {
             value={formData.email}
             onChange={handleChange}
             required
+             className="form-control"
           />
         </div>
         
@@ -71,6 +72,7 @@ const RegisterForm = () => {
             value={formData.password}
             onChange={handleChange}
             required
+             className="form-control"
           />
         </div>
         
