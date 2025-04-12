@@ -13,19 +13,16 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading, error } = useSelector(state => state.auth);
   
-  const [registered, setRegistered] = useState(false); 
+  
 
   useEffect(() => {
-
-
-    if (registered) {
-      navigate('/');
+    if (isAuthenticated) {
+      navigate('/applications');
     }
-    
     return () => {
       dispatch(clearError());
     };
-  }, [registered, navigate, dispatch]);
+  }, [isAuthenticated, navigate, dispatch]);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,11 +34,7 @@ const RegisterForm = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await dispatch(registerUser(formData));
-
-    if (registerUser.fulfilled.match(res)) {
-      setRegistered(true);
-    }
+    await dispatch(registerUser(formData));
   };
   
   return (

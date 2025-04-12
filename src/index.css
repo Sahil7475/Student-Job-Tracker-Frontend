@@ -395,11 +395,20 @@ label {
 }
 
 
+.no-jobs-message-container {
+  grid-column: 1 / -1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
 .no-jobs-message {
   text-align: center;
-  padding: 2rem 1rem;
   color: #555;
 }
+
+
 
 .active-filter {
   background-color: var(--primary-color);

@@ -29,10 +29,8 @@ export const registerUser = createAsyncThunk(
 
 
 const token = localStorage.getItem('token');
-//const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
 const initialState = {
-  //user: user,
   token: token,
   isAuthenticated: !!token,
   isLoading: false,
@@ -61,9 +59,12 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state) => {
+      .addCase(registerUser.fulfilled, (state,action) => {
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
         state.isLoading = false;
         state.error = null;
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;

@@ -33,9 +33,11 @@ const JobList = () => {
           {jobs.length > 0 ? (
             jobs.map((job) => <JobCard key={job._id} job={job} />)
           ) : (
-            <div className="no-jobs-message">
-              <h3>No job applications found</h3>
-              <p>Start tracking your job search by adding your first application.</p>
+            <div className="no-jobs-message-container">
+              <div className="no-jobs-message">
+                <h3>No job applications found</h3>
+                <p>Start tracking your job search by adding your first application.</p>
+              </div>
             </div>
           )}
         </div>

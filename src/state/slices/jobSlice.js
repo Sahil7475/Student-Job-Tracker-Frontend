@@ -92,7 +92,7 @@ const jobSlice = createSlice({
       })
       .addCase(fetchJobs.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.jobs = action.payload;
+        state.jobs = action.payload.jobs;
       })
       .addCase(fetchJobs.rejected, (state, action) => {
         state.isLoading = false;

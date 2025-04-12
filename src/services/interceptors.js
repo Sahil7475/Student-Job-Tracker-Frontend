@@ -25,6 +25,11 @@ export const apiRequest = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
     
+    if (response.status === 500) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Internal server error');
+    }
+
     // Handle non-2xx responses
     if (!response.ok) {
       const errorData = await response.json();
