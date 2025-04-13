@@ -22,7 +22,7 @@ export const apiRequest = async (endpoint, options = {}) => {
     },
   };
   
-  try {
+
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
     
     if (response.status === 500) {
@@ -33,7 +33,7 @@ export const apiRequest = async (endpoint, options = {}) => {
     // Handle non-2xx responses
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'API request failed');
+      return { error: true, message: errorData.error || errorData.message || 'API request failed' };
     }
     
     // Return JSON data if available
@@ -43,10 +43,7 @@ export const apiRequest = async (endpoint, options = {}) => {
     }
     
     return await response.text();
-  } catch (error) {
-    console.error('API request error:', error);
-    throw error;
-  }
+  
 };
 
 

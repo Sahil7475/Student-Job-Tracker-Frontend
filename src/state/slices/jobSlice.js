@@ -20,6 +20,11 @@ export const addJob = createAsyncThunk(
   async (jobData, { rejectWithValue }) => {
     try {
       const response = await jobApi.addJob(jobData);
+      
+      if(response.error){
+        return rejectWithValue(response.message);
+      }
+
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -33,6 +38,11 @@ export const updateJobStatus = createAsyncThunk(
   async ({ jobId, status }, { rejectWithValue }) => {
     try {
       const response = await jobApi.updateJobStatus(jobId, status);
+      
+      if(response.error){
+        return rejectWithValue(response.message);
+      }
+      
       return { jobId, status, updatedJob: response };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -45,7 +55,12 @@ export const deleteJob = createAsyncThunk(
   'jobs/deleteJob',
   async (jobId, { rejectWithValue }) => {
     try {
-      await jobApi.deleteJob(jobId);
+      const response = await jobApi.deleteJob(jobId);
+      
+      if(response.error){
+        return rejectWithValue(response.message);
+      }
+
       return jobId;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -8,6 +8,11 @@ export const registerUser = createAsyncThunk(
     async (userData, { rejectWithValue }) => {
       try {
         const response = await authApi.register(userData);
+        
+        if(response.error){
+          return rejectWithValue(response.message);
+        }
+        
         return response;
       } catch (error) {
         return rejectWithValue(error.message);
@@ -20,6 +25,11 @@ export const registerUser = createAsyncThunk(
     async (credentials, { rejectWithValue }) => {
       try {
         const response = await authApi.login(credentials);
+        
+        if(response.error){
+          return rejectWithValue(response.message);
+        }
+        
         return response;
       } catch (error) {
         return rejectWithValue(error.message);
